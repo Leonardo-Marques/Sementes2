@@ -76,3 +76,37 @@
   }
 }
 
+// ── Scroll da coluna esquerda inteira (em vez de mini-scrolls internos). ──
+// Por padrão o tema fixa a sidebar em 100vh e dá a cada bloco (Sumário,
+// Backlinks, Explorador) um scroll próprio minúsculo. Aqui fazemos a COLUNA
+// inteira rolar e os blocos mostrarem todo o conteúdo.
+@media (min-width: 800px) {
+  .left.sidebar {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex-wrap: nowrap;
+
+    // barra de rolagem discreta
+    scrollbar-width: thin;
+  }
+
+  // remove os limites de altura e os scrolls internos dos blocos da esquerda
+  .left {
+    .toc-content.overflow,
+    .backlinks > ul.overflow,
+    .explorer-content {
+      max-height: none !important;
+      overflow: visible !important;
+      // remove o gradiente que "corta" o conteúdo na base
+      -webkit-mask-image: none !important;
+      mask-image: none !important;
+    }
+
+    // o explorer não deve ter altura de viewport própria nem ficar oculto
+    .explorer {
+      flex: 0 0 auto !important;
+    }
+  }
+}
+

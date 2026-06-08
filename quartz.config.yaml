@@ -79,9 +79,11 @@ plugins:
   - source: github:quartz-community/table-of-contents
     enabled: true
     order: 50
+    options:
+      collapseByDefault: true
     layout:
       position: left
-      priority: 35
+      priority: 20
   - source: github:quartz-community/crawl-links
     enabled: true
     options:
@@ -151,14 +153,17 @@ plugins:
     enabled: true
   - source: github:quartz-community/explorer
     enabled: true
+    options:
+      folderDefaultState: collapsed
+      useSavedState: false
     layout:
       position: left
-      priority: 50
+      priority: 12
   - source: github:quartz-community/graph
     enabled: true
     layout:
       position: left
-      priority: 40
+      priority: 18
   - source: github:quartz-community/search
     enabled: true
     layout:
@@ -171,7 +176,7 @@ plugins:
     enabled: true
     layout:
       position: left
-      priority: 45
+      priority: 15
   - source: github:quartz-community/article-title
     enabled: true
     layout:
@@ -272,7 +277,7 @@ plugins:
 layout:
   groups:
     toolbar:
-      priority: 35
+      priority: 11
       direction: row
       gap: 0.5rem
   byPageType:
