@@ -1,3 +1,78 @@
 @use "./variables.scss" as *;
 
-// put your custom CSS here!
+// ── Grafo: não mostrar o mini-grafo sempre visível na lateral. ──
+// Em vez disso, deixar só um link discreto que abre a Visão Global (modal central).
+.graph {
+  // o título "Visão de gráfico" e o quadro do mini-grafo somem por completo
+  & > h3 {
+    display: none;
+  }
+  .graph-outer {
+    // remove a aparência de "quadro": sem borda, sem fundo, sem altura mínima
+    border: none !important;
+    background: none !important;
+    min-height: 0 !important;
+    height: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .graph-container {
+    // o mini-grafo embutido não é renderizado
+    display: none !important;
+  }
+  // o botão que abre o grafo global vira um link de texto discreto
+  .global-graph-icon {
+    position: static !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    color: var(--dark);
+    opacity: 0.75;
+    background: none !important;
+    border: none;
+    border-radius: 0;
+    font-family: inherit;
+    font-size: 0.9rem;
+
+    &:hover {
+      opacity: 1;
+      color: var(--secondary);
+      background: none !important;
+    }
+
+    // rótulo textual ao lado do ícone (o SVG já vem dentro do botão)
+    &::after {
+      content: "Ver grafo de conexões";
+    }
+
+    svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+  }
+}
+
+// ── Sumário (TOC) na coluna esquerda: corrigir o recolher. ──
+// O tema recolhe o TOC via `flex: 0 1.4rem`, que só funciona na coluna direita.
+// Na esquerda esse mecanismo não esconde o conteúdo, então forçamos aqui.
+.toc {
+  // transição suave ao abrir/fechar
+  .toc-content {
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+  }
+  // quando o cabeçalho está recolhido, o conteúdo realmente some
+  button.toc-header.collapsed + .toc-content {
+    max-height: 0 !important;
+    opacity: 0;
+    margin: 0 !important;
+    visibility: hidden;
+  }
+}
+
